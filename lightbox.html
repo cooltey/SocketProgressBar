@@ -148,14 +148,14 @@
 		<hr>
 		<div class="bank-accounts-img">
 			<p class="grey-font">Or choose from these popular bank accounts</p>
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
-			<img class="bank-icon" src="http://fakeimg.pl/150x100/" onclick="displayBlock($('#step-2'));">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="1">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="2">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="3">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="4">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="5">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="6">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="7">
+			<img class="bank-icon" src="http://fakeimg.pl/150x100/" data-bankid="8">
 		</div>
 
 		 <hr>
@@ -165,7 +165,7 @@
 	<div class="hidden-area" id="step-2">
 		<div class="bank-accounts-information">
         	<!-- Desc -->
-			<h3>Enter your [BANK NAME] username and passowrd</h3>
+			<h3>Enter your <span id="bank-name"></span> username and passowrd</h3>
 			<p></p><br><br>
 			<!-- Desc -->
 
@@ -217,6 +217,9 @@
 	</div>
 
 	<script>
+
+		var dummy_bank = ["BOA", "BOA2", "BOA3", "BOA4", "BOA5", "BOA6", "BOA7", "BOA8"];
+
 		function displayBlock(div_id){
 
 			$("#modal-content").html("");
@@ -226,6 +229,17 @@
 				// div_id.remove();
 				clone_div.removeAttr("class").appendTo("#modal-content");
 
+
+				// go to step 2 and bring bank id to it
+				if(clone_div.attr("id") == "step-1"){
+					$(".bank-icon").click(function(){
+						var bank_id = parseInt($(this).attr("data-bankid"));
+
+						$("#bank-name").html(dummy_bank[bank_id-1]);
+
+						displayBlock($("#step-2"));
+					});
+				}
 
 				if(clone_div.attr("id") == "step-3"){
 
